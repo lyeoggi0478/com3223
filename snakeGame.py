@@ -91,16 +91,7 @@ while running:
     snake_head.append(snake_pos_x)
     snake_head.append(snake_pos_y)
     snake_list.append(snake_head)
-    
-    screen.fill(WHITE)
-    pygame.draw.rect(screen, GRAY, [0,0, DISPLAY_SIZE[0], DISPLAY_SIZE[1]],10)
-    if len(snake_list) > snake_tail :
-        del snake_list[0]
-    snake(SNAKE_SIZE, snake_list)
-    
-    pygame.draw.rect(screen, BLUE, [foodx, foody, SNAKE_SIZE, SNAKE_SIZE])
-    message(font_score, "Score : " + str(score), GREEN, DISPLAY_SIZE[0]/2, 30)
-    
+
     if snake_pos_x >= (DISPLAY_SIZE[0] - SNAKE_SIZE) or \
        snake_pos_x - (SNAKE_SIZE/2) < 0 or \
        snake_pos_y >= (DISPLAY_SIZE[1] - SNAKE_SIZE) or \
@@ -111,13 +102,22 @@ while running:
         score = score + 10
         snake_tail += 1
         food()
+    
+    screen.fill(WHITE)
+    pygame.draw.rect(screen, GRAY, [0,0, DISPLAY_SIZE[0], DISPLAY_SIZE[1]],10)
+    if len(snake_list) > snake_tail :
+        del snake_list[0]
+    snake(SNAKE_SIZE, snake_list)
+    
+    pygame.draw.rect(screen, BLUE, [foodx, foody, SNAKE_SIZE, SNAKE_SIZE])
+    message(font_score, "Score : " + str(score), GREEN, DISPLAY_SIZE[0]/2, 30)
         
         
         
     pygame.display.update()
     clock.tick(snake_speed)
 
-message(font_gameOver, 'Game Over', RED, int(DISPLAY_SIZE[0]/2), int(DISPLAY_SIZE[1]/2))
+message(font_gameOver, '게임종료', RED, int(DISPLAY_SIZE[0]/2), int(DISPLAY_SIZE[1]/2))
 message(font_madeBy, 'made by SuHyeon', GRAY, int(DISPLAY_SIZE[0]/2), int(DISPLAY_SIZE[1]/2)+30)
 pygame.display.update()
 time.sleep(3)
